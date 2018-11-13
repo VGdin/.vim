@@ -62,7 +62,7 @@ set lazyredraw		"redraw only when needed
 set showmatch		"Highlight the matchin parantheses, or wings {([])}
 
 "Cancel search with escape
-nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
+"nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 set incsearch   "search as characters are entered
 set hlsearch    "highlight matches
 
