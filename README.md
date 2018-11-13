@@ -1,3 +1,3 @@
 # vimrc
-##Vim
-##Tmux
+## Vim
+## Tmux
