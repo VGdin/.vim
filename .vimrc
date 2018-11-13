@@ -80,5 +80,5 @@ nnoremap <c-l> <c-w>l
 " vv to generate new vertical split
  nnoremap <silent> vv <C-w>v
 
-
-
+" Toggle NerdTree with ctrl N
+map <C-n> :NERDTreeToggle<CR>
