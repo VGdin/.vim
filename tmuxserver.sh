@@ -16,15 +16,15 @@ else
         # set up tmux
         tmux start-server
         
-        # create a new tmux session, starting vim from a saved session in the new window
+        # create a new tmux session
         tmux new-session -d -s $session -n vim 
         
-        # Select pane 1, set dir to api, run vim
+        # Select pane 1, run vim
         tmux selectp -t 1 
-        tmux send-keys "pathtowork;vim" C-m 
+        tmux send-keys "vim" C-m 
         
-        # Split pane 1 horizontal by 85%, start redis-server
-        tmux splitw -h -p 15
+        # Split pane 1 horizontal by 75%, start 
+        tmux splitw -h -p 25
         
         # Select pane 1
         tmux selectp -t 1
