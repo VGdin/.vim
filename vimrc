@@ -78,7 +78,15 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 " vv to generate new vertical split
- nnoremap <silent> vv <C-w>v
+nnoremap <silent> vv <C-w>v
 
 " Toggle NerdTree with ctrl N
 map <C-n> :NERDTreeToggle<CR>
+
+" #######################################
+" Diverse
+" #######################################
+
+" Write all buffers before navigating from Vim to tmux pane
+let g:tmux_navigator_save_on_switch = 2
+
