@@ -1,0 +1,83 @@
+1a2
+> #include <alsa/asoundlib.h>
+5,9d5
+< #if defined(__OpenBSD__)
+< 	#include <soundcard.h>
+< #else
+< 	#include <sys/soundcard.h>
+< #endif
+16c12
+< vol_perc(const char *card)
+---
+> vol_perc(const char *placeholder)
+18,40c14
+< 	size_t i;
+< 	int v, afd, devmask;
+< 	char *vnames[] = SOUND_DEVICE_NAMES;
+< 
+< 	if ((afd = open(card, O_RDONLY | O_NONBLOCK)) < 0) {
+< 		warn("open '%s':", card);
+< 		return NULL;
+< 	}
+< 
+< 	if (ioctl(afd, (int)SOUND_MIXER_READ_DEVMASK, &devmask) < 0) {
+< 		warn("ioctl 'SOUND_MIXER_READ_DEVMASK':");
+< 		close(afd);
+< 		return NULL;
+< 	}
+< 	for (i = 0; i < LEN(vnames); i++) {
+< 		if (devmask & (1 << i) && !strcmp("vol", vnames[i])) {
+< 			if (ioctl(afd, MIXER_READ(i), &v) < 0) {
+< 				warn("ioctl 'MIXER_READ(%ld)':", i);
+< 				close(afd);
+< 				return NULL;
+< 			}
+< 		}
+< 	}
+---
+>     (void)placeholder; //Potential use?
+42,44c16,55
+< 	close(afd);
+< 
+< 	return bprintf("%d", v & 0xff);
+---
+>     long now, min, max, ret;
+>     snd_mixer_t *handle;
+>     snd_mixer_selem_id_t *sid;
+>     snd_mixer_elem_t *elem; 
+>     const char *card = "default";
+>     const char *selem_name = "Master";
+> 
+> 
+>     //Open empty mixer
+>     if (snd_mixer_open(&handle, 0) != 0) goto cleanup;
+>     //Attach HTCL with name 'card' to mixer
+>     if (snd_mixer_attach(handle, card) != 0) goto cleanup;
+>     
+>     //Register mixer, options, null
+>     if (snd_mixer_selem_register(handle, NULL, NULL)  != 0) goto cleanup;
+>     //Load elements of mixer
+>     if (snd_mixer_load(handle) != 0) goto cleanup;
+> 
+>     // Allocate, set id and name, find
+>     snd_mixer_selem_id_alloca(&sid);
+>     snd_mixer_selem_id_set_index(sid, 0);
+>     snd_mixer_selem_id_set_name(sid, selem_name);
+>     if (!(elem = snd_mixer_find_selem(handle, sid))) goto cleanup;
+> 
+>     /* DO STUFF */
+> 
+>     snd_mixer_selem_get_playback_volume_range(elem, &min, &max);
+>     /* NB: Assumes 'set_volume_all' */
+>     snd_mixer_selem_get_playback_volume(elem, SND_MIXER_SCHN_FRONT_LEFT, &now);
+>     ret = (now*100)/max;
+> 
+>     /* DO STUFF */
+> 
+>     snd_mixer_close(handle);
+> 	return bprintf("%d", ret); //returns % of max
+> 	//return bprintf("%d", max & 0xff);
+> 
+>  cleanup:
+>     if (handle) snd_mixer_close(handle);
+>     return NULL;
