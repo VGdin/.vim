@@ -17,7 +17,7 @@ static const unsigned int gappx     = 5;        /* gap pixel between windows, us
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int extrabar           = 1;        /* 0 means no extra bar */
+static const int extrabar           = 0;        /* 0 means no extra bar */
 
 #define NUMCOLORS         4
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
@@ -76,7 +76,6 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *ranger[]  = { "st", "ranger" };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
