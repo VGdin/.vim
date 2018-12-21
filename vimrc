@@ -1,4 +1,3 @@
-"B
 "" #######################################
 " PLUGINS
 " #######################################
@@ -29,9 +28,26 @@ Plug 'https://github.com/christoomey/vim-tmux-navigator'
 " Color Theme, mayby not supposed to be here
 Plug 'https://github.com/altercation/vim-colors-solarized'
 
+" Dev Icons, more icons glyphs etc..
+Plug 'https://github.com/ryanoasis/vim-devicons'
+
+" Asynchronous linting/fixing for Vim and Language Server Protocol (LSP)
+" integration
+Plug 'https://github.com/w0rp/ale'
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
+
+" Powerline
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
+" #######################################
+" Encodings
+" #######################################
+set encoding=UTF-8
 
 " #######################################
 " COLORS
@@ -81,12 +97,11 @@ nnoremap <c-l> <c-w>l
 nnoremap <silent> vv <C-w>v
 
 " Toggle NerdTree with ctrl N
-map <C-n> :NERDTreeToggle<CR>
+map <c-n> :NERDTreeToggle<CR>
 
 " #######################################
 " Diverse
 " #######################################
-
 " Write all buffers before navigating from Vim to tmux pane
 let g:tmux_navigator_save_on_switch = 2
 

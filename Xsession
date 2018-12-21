@@ -1,0 +1,29 @@
+#!/bin/bash
+if [ -x /usr/bin/xfce4-power-manager ] ; then
+   sleep 1
+   xfce4-power-manager &
+fi
+
+# Gefan i att bipa !!!!!!
+xset b off
+sleep 1
+
+#Dumheter?
+setxkbmap -option caps:escape
+
+xrdb -merge .Xresources
+
+
+#Info for dwm status bar
+touch /tmp/lemon_info
+chmod /tmp/lemon_info 0666
+slstatus &
+sh ~/.lemon_script.sh | lemonbar -p -b -d -f "Literation Mono Powerline:size=24" & 
+
+#Wallpaper
+~/.fehbg &
+
+#Compoton transparancy etc.
+compton &
+
+exec dwm

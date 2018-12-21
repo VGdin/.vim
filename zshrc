@@ -66,13 +66,12 @@ plugins=(
   extract
   git
   sprunge
-  tmux
   z
 )
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOCONNECT=true
 source $ZSH/oh-my-zsh.sh
+
+# Powerline
+source  /usr/share/powerline/bindings/zsh/powerline.zsh
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -91,7 +90,7 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # vi
 bindkey -v
