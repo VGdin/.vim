@@ -24,6 +24,8 @@ then
         echo Oh-my-zsh already exist
 else
         wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+        cp zshrc $HOME/.zshrc
+        source $HOME/.zshrc
 fi
 
 #zsh
